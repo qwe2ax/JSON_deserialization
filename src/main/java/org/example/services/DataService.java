@@ -14,40 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 public class DataService {
-    public static List<Entrepreneur> getEntrepreneurs() throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
+    public static <T> List<T> getData(String path, TypeReference<Map<String, List<T>>> typeReference) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        InputStream inputStream = Resources.getResource(path).openStream();
 
-        InputStream inputStream = Resources.getResource("entrepreneurs.json").openStream();
+        Map<String, List<T>> map = mapper.readValue(inputStream, typeReference);
 
-        Map<String, List<Entrepreneur>> map = objectMapper.readValue(inputStream, new TypeReference<Map<String, List<Entrepreneur>>>() {});
         return map.values().stream()
                 .flatMap(Collection::stream)
                 .toList();
     }
-
-    public static List<Company> getCompanies() throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        InputStream inputStream = Resources.getResource("companies.json").openStream();
-
-        Map<String, List<Company>> map = objectMapper.readValue(inputStream, new TypeReference<Map<String, List<Company>>>() {});
-        return map.values().stream()
-                .flatMap(Collection::stream)
-                .toList();
-    }
-
-    public static List<CloseInfoItem> getCloseInfoItems() throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        InputStream inputStream = Resources.getResource("closeinfo.json").openStream();
-
-        Map<String, List<CloseInfoItem>> map = objectMapper.readValue(inputStream, new TypeReference<Map<String, List<CloseInfoItem>>>() {});
-        return map.values().stream()
-                .flatMap(Collection::stream)
-                .toList();
-    }
-
 }
