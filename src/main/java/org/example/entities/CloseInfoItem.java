@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "Id",
         "CloseDate"
 })
-public class CloseInfoItem {
+public class CloseInfoItem extends Company {
 
     @JsonProperty("Id")
     private String id;

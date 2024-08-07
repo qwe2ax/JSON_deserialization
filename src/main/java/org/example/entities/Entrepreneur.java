@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "CreationDate",
         "ReportDate"
 })
-public class Entrepreneur {
+public class Entrepreneur extends Company {
 
     @JsonProperty("Id")
     private String id;
@@ -108,13 +108,19 @@ public class Entrepreneur {
 
     @Override
     public String toString() {
-        return "Entrepreneur{" +
-                "reportDate='" + reportDate + '\'' +
-                ", creationDate='" + creationDate + '\'' +
-                ", profit='" + profit + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+        return '[' + "firstName = " + firstName +
+                ", reportDate = " + reportDate +
+                ", creationDate = " + creationDate +
+                ", profit = " + profit +
+                ", secondName = " + secondName +
+                ", firstName = " + firstName +
+                ", id = " + id +
+                ']';
     }
+
+    @Override
+    public int compareTo(Company o) {
+        return this.getReportDate().compareTo(o.getReportDate());
+    }
+
 }

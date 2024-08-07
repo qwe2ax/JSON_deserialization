@@ -2,6 +2,8 @@ package org.example.entities;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "CreationDate",
         "ReportDate"
 })
-public class Company {
+public class Company implements Comparable<Company> {
 
     @JsonProperty("Id")
     private String id;
@@ -99,8 +101,12 @@ public class Company {
                 ", name='" + name + '\'' +
                 ", profit='" + profit + '\'' +
                 ", creationDate='" + creationDate + '\'' +
-                ", reportDate='" + reportDate + '\'' +
-                ", additionalProperties=" + additionalProperties +
-                '}';
+                ", reportDate='" + reportDate + '\''+ '}';
     }
+
+    @Override
+    public int compareTo(Company o) {
+        return this.getReportDate().compareTo(o.reportDate);
+    }
+
 }
