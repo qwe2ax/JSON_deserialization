@@ -6,46 +6,26 @@ import org.example.entities.Company;
 import org.example.entities.Entrepreneur;
 import org.example.services.AnalyticService;
 import org.example.services.DataService;
+import org.example.services.InitService;
 
-import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static org.example.services.InitService.*;
+
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        String entrepreneursPath = "entrepreneurs.json";
-        String companiesPath = "companies.json";
-        String closedPath = "closeinfo.json";
-        List<CloseInfoItem> closeInfoItems = DataService.getData(closedPath, new TypeReference<>() {
-        });
-        Set<String> closedIds = closeInfoItems.stream()
-                .map(CloseInfoItem::getId)
-                .collect(Collectors.toSet());
-//        closeInfoItems.forEach(System.out::println);
+    public static String entrepreneursPath = "entrepreneurs.json";
+    public static String companiesPath = "companies.json";
+    public static String closedPath = "closeinfo.json";
 
-
-        List<Entrepreneur> entrepreneurs = DataService.getData(entrepreneursPath, new TypeReference<>() {
-        });
-
-        int size = entrepreneurs.size();
-
-        entrepreneurs = DataService.getFilteredData(entrepreneurs, closedIds);
-        int filteredSize = entrepreneurs.size();
-        entrepreneurs.forEach(System.out::println);
-        System.out.println(AnalyticService.getAvgProfit(entrepreneurs));
-
-
-
-
-//        List<Company> companies = DataService.getData(companiesPath, new TypeReference<>() {
-//        });
-//        companies = AnalyticService.analytic(companies, closedIds);
-//        companies.forEach(System.out::println);
-//
-//        System.out.println(AnalyticService.getAvgProfit(companies));
-
+    public static void main(String[] args) {
+        InitService.init();
+        AnalyticService.printAnalytic();
     }
 }
