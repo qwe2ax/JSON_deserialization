@@ -1,10 +1,10 @@
-package org.example.entities.Implementations;
+package org.example.entities.implementations;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
-import org.example.entities.Interfaces.*;
+import org.example.entities.interfaces.*;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

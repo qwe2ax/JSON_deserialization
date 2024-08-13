@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.services.implementations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 import static org.example.services.InitService.*;
 
-public class DataService {
+public class DataServiceImpl {
 
     public static <T> List<T> getData(String path, TypeReference<Map<String, List<T>>> typeReference) {
         ObjectMapper mapper = new ObjectMapper();

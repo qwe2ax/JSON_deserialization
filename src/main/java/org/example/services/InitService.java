@@ -1,9 +1,10 @@
 package org.example.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.example.entities.CloseInfoItem;
-import org.example.entities.Company;
-import org.example.entities.Entrepreneur;
+import org.example.entities.implementations.CloseInfoItem;
+import org.example.entities.implementations.Company;
+import org.example.entities.implementations.Entrepreneur;
+import org.example.services.implementations.DataServiceImpl;
 
 import java.util.List;
 import java.util.Set;
@@ -21,18 +22,18 @@ public class InitService {
 
 
     public static void init() {
-        closeInfoItems = DataService.getData(closedPath, new TypeReference<>() {
+        closeInfoItems = DataServiceImpl.getData(closedPath, new TypeReference<>() {
         });
         closedIds = closeInfoItems.stream()
                 .map(CloseInfoItem::getId)
                 .collect(Collectors.toSet());
 
-        entrepreneurs = DataService.getData(entrepreneursPath, new TypeReference<>() {
+        entrepreneurs = DataServiceImpl.getData(ENTREPRENEURS_PATH, new TypeReference<>() {
         });
-        entrepreneurs = DataService.removeDuplicateData(entrepreneurs);
-        companies = DataService.getData(companiesPath, new TypeReference<>() {
+        entrepreneurs = DataServiceImpl.removeDuplicateData(entrepreneurs);
+        companies = DataServiceImpl.getData(companiesPath, new TypeReference<>() {
         });
-        companies = DataService.removeDuplicateData(companies);
-        DataService.removeInactiveData();
+        companies = DataServiceImpl.removeDuplicateData(companies);
+        DataServiceImpl.removeInactiveData();
     }
 }
