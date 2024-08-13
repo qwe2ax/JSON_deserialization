@@ -3,14 +3,15 @@ package org.example.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
-import org.example.entities.Company;
+import org.example.entities.interfaces.DateComparable;
+import org.example.entities.interfaces.Identifiable;
+import org.example.entities.interfaces.Reportable;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.example.services.InitService.*;
@@ -33,11 +34,11 @@ public class DataService {
                 .toList();
     }
 
-    public static <T extends Company> List<T> removeDuplicateData(List<T> companies) {
+    public static <T extends DateComparable & Identifiable & Reportable> List<T> removeDuplicateData(List<T> companies) {
         return companies.stream()
                 .collect(Collectors.groupingBy(T::getId))
                 .values().stream()
-                .map(l -> l.stream().max(T::compareTo).orElseThrow()).toList();
+                .map(l -> l.stream().max(T::compareDate).orElseThrow()).toList();
     }
 
     public static void removeInactiveData() {
