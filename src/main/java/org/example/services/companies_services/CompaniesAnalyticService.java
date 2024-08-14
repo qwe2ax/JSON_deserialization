@@ -1,8 +1,9 @@
-package org.example.services;
+package org.example.services.companies_services;
 
-import org.example.entities.interfaces.Creatable;
+import org.example.entities.implementations.CloseInfoItem;
+import org.example.entities.implementations.Company;
 import org.example.entities.interfaces.Identifiable;
-import org.example.entities.interfaces.Profitable;
+import org.example.services.interfaces.AnalyticService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -10,43 +11,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.example.services.InitService.*;
 
-public class AnalyticService {
+public class CompaniesAnalyticService implements AnalyticService<Company> {
 
-    public static void printAnalytic() {
-        int companiesProfit = getAvgProfit(companies);
-        int entrepreneursProfit = getAvgProfit(entrepreneurs);
-        int closedCompaniesProfit = getAvgProfit(closedCompanies);
-        int closedEntrepreneursProfit = getAvgProfit(closedEntrepreneurs);
-        long avgLifetimeForCompanies = getAvgLifeTime(closedCompanies);
-        long avgLifetimeForEntrepreneurs = getAvgLifeTime(closedEntrepreneurs);
-        System.out.println("Аналитическая информация по ИП и Компаниям:\n ");
-        System.out.printf("Количество действующих компаний: %d\n" +
-                        "Количество действующих ИП: %d\n" +
-                        "Количество закрытых компаний: %d\n" +
-                        "Количество закрытых ИП: %d\n" +
-                        "Средняя прибыль действующих компаний: %dр\n" +
-                        "Средняя прибыль действующих ИП: %dр\n" +
-                        "Средняя прибыль недействующих компаний: %dр\n" +
-                        "Средняя прибыль недействующих ИП: %dр\n" +
-                        "Среднее время существования компаний (в днях): %d\n" +
-                        "Среднее время существования ИП (в днях): %d\n",
-                companies.size(), entrepreneurs.size(),
-                closedCompanies.size(), closedEntrepreneurs.size(),
-                companiesProfit, entrepreneursProfit, closedCompaniesProfit, closedEntrepreneursProfit,
-                avgLifetimeForCompanies, avgLifetimeForEntrepreneurs);
-
-    }
-
-    public static <T extends Profitable> int getAvgProfit(List<T> companies) {
-//        System.out.println(companies.size());
+    @Override
+    public int getAvgProfit(List<Company> companies) {
         return companies.stream().mapToInt(company -> Integer.parseInt(company.getProfit())).sum() / companies.size();
     }
 
-    public static <T extends Identifiable & Creatable> long getAvgLifeTime(List<T> companies) {
+    @Override
+    public long getAvgLifetime(List<Company> companies, List<CloseInfoItem> closeInfoItems) {
         Map<String, LocalDateTime> companyCreationDates = companies.stream()
-                /* Тут лист компаний преобразуется в мапу, мапа выглядит как String Id объекта, дата создания объекта
+                /* Тут лист компаний преобразуется в мапу, мапа выглядит как String Id объекта, LocalDateTime дата создания объекта
                  * значением же является поле creationDate, которое парсится к LocalDate */
                 .collect(Collectors.toMap(Identifiable::getId, company -> LocalDateTime.parse(company.getCreationDate())));
         long sumOfLifeTimeInDays = closeInfoItems.stream()
@@ -89,5 +65,4 @@ public class AnalyticService {
         */
         return count == 0 ? 0 : sumOfLifeTimeInDays / count;
     }
-
 }
