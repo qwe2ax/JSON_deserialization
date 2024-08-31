@@ -1,12 +1,14 @@
-package org.example.services.companies_services;
+package org.example.services.companies;
 
 import org.example.entities.implementations.Company;
 import org.example.services.interfaces.DataFilter;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 public class CompaniesDataFilter implements DataFilter<Company> {
 
     @Override

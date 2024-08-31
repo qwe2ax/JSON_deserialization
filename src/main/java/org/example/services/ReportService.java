@@ -3,17 +3,20 @@ package org.example.services;
 import org.example.entities.implementations.CloseInfoItem;
 import org.example.entities.implementations.Company;
 import org.example.entities.implementations.Entrepreneur;
-import org.example.services.companies_services.CompaniesAnalyticService;
-import org.example.services.entrepreneurs_services.EntrepreneursAnalyticService;
+import org.example.services.companies.CompaniesAnalyticService;
+import org.example.services.entrepreneurs.EntrepreneursAnalyticService;
+import org.example.services.interfaces.AnalyticService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
+@Component
 public class ReportService {
     public static void printAnalytic(List<Company> companies, List<Entrepreneur> entrepreneurs, List<Company> closedCompanies,
-                                     List<Entrepreneur> closedEntrepreneurs, List<CloseInfoItem> closeInfoItems) {
-        CompaniesAnalyticService cas = new CompaniesAnalyticService();
-        EntrepreneursAnalyticService eas = new EntrepreneursAnalyticService();
+                                     List<Entrepreneur> closedEntrepreneurs, List<CloseInfoItem> closeInfoItems, ClassPathXmlApplicationContext context) {
+        CompaniesAnalyticService cas = context.getBean("companiesAnalyticService", CompaniesAnalyticService.class);
+        EntrepreneursAnalyticService eas = context.getBean("entrepreneursAnalyticService", EntrepreneursAnalyticService.class);
         int companiesProfit = cas.getAvgProfit(companies);
         int entrepreneursProfit = eas.getAvgProfit(entrepreneurs);
         int closedCompaniesProfit = cas.getAvgProfit(closedCompanies);

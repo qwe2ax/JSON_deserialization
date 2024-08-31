@@ -7,11 +7,12 @@ import org.example.entities.implementations.Company;
 import org.example.entities.implementations.Entrepreneur;
 import org.example.services.DataService;
 import org.example.services.ReportService;
-import org.example.services.companies_services.CompaniesDataFilter;
-import org.example.services.entrepreneurs_services.EntrepreneursDataFilter;
+import org.example.services.companies.CompaniesDataFilter;
+import org.example.services.entrepreneurs.EntrepreneursDataFilter;
+import org.example.services.interfaces.DataFilter;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class Main {
@@ -21,9 +22,11 @@ public class Main {
     static final String CLOSEINFO_JSON = "closeinfo.json";
 
     public static void main(String[] args) {
-        DataService dataService = new DataService();
-        CompaniesDataFilter cdf = new CompaniesDataFilter();
-        EntrepreneursDataFilter edf = new EntrepreneursDataFilter();
+        ClassPathXmlApplicationContext context
+                = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DataService dataService = context.getBean("dataService", DataService.class);
+        CompaniesDataFilter cdf = context.getBean("companiesDataFilter", CompaniesDataFilter.class);
+        EntrepreneursDataFilter edf = context.getBean("entrepreneursDataFilter", EntrepreneursDataFilter.class);
         List<CloseInfoItem> closeInfoItems = dataService.getData(CLOSEINFO_JSON, new TypeReference<>() {});
         Set<String> closedIds = dataService.getClosedIds(closeInfoItems);
         List<Company> companies = dataService.getData(COMPANIES_JSON, new TypeReference<>() {});
@@ -37,6 +40,7 @@ public class Main {
 
 
 
-        ReportService.printAnalytic(companies, entrepreneurs, closedCompanies, closedEntrepreneurs, closeInfoItems);
+        ReportService.printAnalytic(companies, entrepreneurs, closedCompanies, closedEntrepreneurs, closeInfoItems, context);
+        context.close();
     }
 }

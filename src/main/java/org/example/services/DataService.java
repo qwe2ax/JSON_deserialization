@@ -1,10 +1,10 @@
 package org.example.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
 import org.example.entities.implementations.CloseInfoItem;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,13 +15,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
+@Component
 public class DataService {
 
     public <T> List<T> getData(String path, TypeReference<Map<String, List<T>>> typeReference) {
         ObjectMapper mapper = new ObjectMapper();
         InputStream inputStream;
         Map<String, List<T>> map;
-//        TypeReference<Map<String, List<T>>> typeReference = new TypeReference<>(){};
         try {
             inputStream = Resources.getResource(path).openStream();
             map = mapper.readValue(inputStream, typeReference);
