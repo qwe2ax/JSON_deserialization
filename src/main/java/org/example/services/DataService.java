@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
 import org.example.entities.implementations.CloseInfoItem;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-@Component
+@Service
 public class DataService {
 
     public <T> List<T> getData(String path, TypeReference<Map<String, List<T>>> typeReference) {

@@ -11,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class ReportService {
 
     private final List<Company> companies;
@@ -55,6 +57,15 @@ public class ReportService {
         this.closedEntrepreneurs = entrepreneursDataFilter.transferInactiveData(uniqueEntrepreneurs, closedIds);
     }
 
+    public Map<String, Object> getStatistic() {
+        Map<String, Object> stats = new HashMap<>();
+        stats.put("activeCompanies", filteredCompanies);
+        stats.put("closedCompanies", closedCompanies);
+        stats.put("activeEntrepreneurs", filteredEntrepreneurs);
+        stats.put("closedEntrepreneurs", closedEntrepreneurs);
+        return stats;
+    }
+
     public void printAnalytic(AnnotationConfigApplicationContext context) {
         CompaniesAnalyticService cas = context.getBean("companiesAnalyticService", CompaniesAnalyticService.class);
         EntrepreneursAnalyticService eas = context.getBean("entrepreneursAnalyticService", EntrepreneursAnalyticService.class);
@@ -81,7 +92,7 @@ public class ReportService {
                 closedCompanies.size(), closedEntrepreneurs.size(),
                 companiesProfit, entrepreneursProfit, closedCompaniesProfit, closedEntrepreneursProfit,
                 avgLifetimeForCompanies, avgLifetimeForEntrepreneurs);
-
-
     }
+
+
 }

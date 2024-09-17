@@ -1,4 +1,6 @@
 plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
 }
 
@@ -10,11 +12,15 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.3.3'
+    // https://mvnrepository.com/artifact/org.springframework/spring-web
+    implementation group: 'org.springframework', name: 'spring-web', version: '6.1.12'
     // https://mvnrepository.com/artifact/org.springframework/spring-context
     implementation group: 'org.springframework', name: 'spring-context', version: '6.1.12'
-// https://mvnrepository.com/artifact/org.springframework/spring-core
+    // https://mvnrepository.com/artifact/org.springframework/spring-core
     implementation group: 'org.springframework', name: 'spring-core', version: '6.1.12'
-// https://mvnrepository.com/artifact/org.springframework/spring-beans
+    // https://mvnrepository.com/artifact/org.springframework/spring-beans
     implementation group: 'org.springframework', name: 'spring-beans', version: '6.1.12'
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
