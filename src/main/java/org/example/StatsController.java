@@ -1,6 +1,7 @@
 package org.example;
 
-import org.example.services.ReportService;
+import org.example.entities.AnalyticResponse;
+import org.example.services.ReportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,10 +11,10 @@ import java.util.Map;
 @RestController
 public class StatsController {
 
-    private final ReportService reportService;
+    private final ReportServiceImpl reportService;
 
     @Autowired
-    public StatsController(ReportService reportService) {
+    public StatsController(ReportServiceImpl reportService) {
         this.reportService = reportService;
     }
 
@@ -21,5 +22,10 @@ public class StatsController {
     @GetMapping("/stats")
     public Map<String, Object> getStats() {
         return reportService.getStatistic();
+    }
+
+    @GetMapping("/analytic")
+    public AnalyticResponse getAnalytic() {
+        return reportService.getAnalytic();
     }
 }

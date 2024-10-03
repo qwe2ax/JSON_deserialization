@@ -5,15 +5,11 @@ import org.example.entities.implementations.CloseInfoItem;
 import org.example.entities.implementations.Company;
 import org.example.entities.implementations.Entrepreneur;
 import org.example.services.DataService;
-import org.example.services.ReportService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Configuration
 @ComponentScan("org.example")
@@ -34,7 +30,5 @@ public class MyConfig {
     public List<CloseInfoItem> closeInfoItems(DataService dataService) {
         return dataService.getData("closeinfo.json", new TypeReference<>() {});
     }
-
-
 
 }

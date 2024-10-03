@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.entities.AnalyticResponse;
 import org.example.entities.implementations.CloseInfoItem;
 import org.example.entities.implementations.Company;
 import org.example.entities.implementations.Entrepreneur;
@@ -7,8 +8,8 @@ import org.example.services.companies.CompaniesAnalyticService;
 import org.example.services.companies.CompaniesDataFilter;
 import org.example.services.entrepreneurs.EntrepreneursAnalyticService;
 import org.example.services.entrepreneurs.EntrepreneursDataFilter;
+import org.example.services.interfaces.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class ReportService {
+public class ReportServiceImpl implements ReportService {
 
     private final List<Company> companies;
     private final List<Entrepreneur> entrepreneurs;
@@ -33,8 +34,8 @@ public class ReportService {
     private List<Entrepreneur> closedEntrepreneurs;
 
     @Autowired
-    public ReportService(List<Company> companies, List<Entrepreneur> entrepreneurs, List<CloseInfoItem> closeInfoItems,
-                         CompaniesDataFilter companiesDataFilter, EntrepreneursDataFilter entrepreneursDataFilter) {
+    public ReportServiceImpl(List<Company> companies, List<Entrepreneur> entrepreneurs, List<CloseInfoItem> closeInfoItems,
+                             CompaniesDataFilter companiesDataFilter, EntrepreneursDataFilter entrepreneursDataFilter) {
         this.companies = companies;
         this.entrepreneurs = entrepreneurs;
         this.closeInfoItems = closeInfoItems;
@@ -66,32 +67,36 @@ public class ReportService {
         return stats;
     }
 
-    public void printAnalytic(AnnotationConfigApplicationContext context) {
-        CompaniesAnalyticService cas = context.getBean("companiesAnalyticService", CompaniesAnalyticService.class);
-        EntrepreneursAnalyticService eas = context.getBean("entrepreneursAnalyticService", EntrepreneursAnalyticService.class);
+    public AnalyticResponse getAnalytic() {
+        CompaniesAnalyticService cas = new CompaniesAnalyticService();
+        EntrepreneursAnalyticService eas = new EntrepreneursAnalyticService();
         int companiesProfit = cas.getAvgProfit(filteredCompanies);
         int entrepreneursProfit = eas.getAvgProfit(filteredEntrepreneurs);
         int closedCompaniesProfit = cas.getAvgProfit(closedCompanies);
         int closedEntrepreneursProfit = eas.getAvgProfit(closedEntrepreneurs);
         long avgLifetimeForCompanies = cas.getAvgLifetime(closedCompanies, closeInfoItems);
         long avgLifetimeForEntrepreneurs = eas.getAvgLifetime(closedEntrepreneurs, closeInfoItems);
-        System.out.println("Analytical Information for Individual Entrepreneurs and Companies:\n");
-        System.out.printf("""
-                        Number of active companies: %d
-                        Number of active individual entrepreneurs: %d
-                        Number of closed companies: %d
-                        Number of closed individual entrepreneurs: %d
-                        Average profit of active companies: %d RUB
-                        Average profit of active individual entrepreneurs: %d RUB
-                        Average profit of closed companies: %d RUB
-                        Average profit of closed individual entrepreneurs: %d RUB
-                        Average lifespan of companies (in days): %d
-                        Average lifespan of individual entrepreneurs (in days): %d
-                        """,
-                filteredCompanies.size(), filteredEntrepreneurs.size(),
+
+        AnalyticResponse analyticResponse = new AnalyticResponse(filteredCompanies.size(), filteredEntrepreneurs.size(),
                 closedCompanies.size(), closedEntrepreneurs.size(),
                 companiesProfit, entrepreneursProfit, closedCompaniesProfit, closedEntrepreneursProfit,
                 avgLifetimeForCompanies, avgLifetimeForEntrepreneurs);
+
+        return analyticResponse;
+
+//        return String.format("""
+//                        Number of active companies: %d
+//                        Number of active individual entrepreneurs: %d
+//                        Number of closed companies: %d
+//                        Number of closed individual entrepreneurs: %d
+//                        Average profit of active companies: %d RUB
+//                        Average profit of active individual entrepreneurs: %d RUB
+//                        Average profit of closed companies: %d RUB
+//                        Average profit of closed individual entrepreneurs: %d RUB
+//                        Average lifespan of companies (in days): %d
+//                        Average lifespan of individual entrepreneurs (in days): %d
+//                        """,
+
     }
 
 
