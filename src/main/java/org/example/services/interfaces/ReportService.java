@@ -1,7 +1,7 @@
 package org.example.services.interfaces;
 
-import org.example.entities.AnalyticResponse;
+import org.example.entities.AnalyticResponseDTO;
 
 public interface ReportService {
-    AnalyticResponse getAnalytic();
+    AnalyticResponseDTO getAnalytic();
 }

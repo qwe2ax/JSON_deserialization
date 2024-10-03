@@ -1,6 +1,6 @@
 package org.example.services;
 
-import org.example.entities.AnalyticResponse;
+import org.example.entities.AnalyticResponseDTO;
 import org.example.entities.implementations.CloseInfoItem;
 import org.example.entities.implementations.Company;
 import org.example.entities.implementations.Entrepreneur;
@@ -67,7 +67,7 @@ public class ReportServiceImpl implements ReportService {
         return stats;
     }
 
-    public AnalyticResponse getAnalytic() {
+    public AnalyticResponseDTO getAnalytic() {
         CompaniesAnalyticService cas = new CompaniesAnalyticService();
         EntrepreneursAnalyticService eas = new EntrepreneursAnalyticService();
         int companiesProfit = cas.getAvgProfit(filteredCompanies);
@@ -77,12 +77,12 @@ public class ReportServiceImpl implements ReportService {
         long avgLifetimeForCompanies = cas.getAvgLifetime(closedCompanies, closeInfoItems);
         long avgLifetimeForEntrepreneurs = eas.getAvgLifetime(closedEntrepreneurs, closeInfoItems);
 
-        AnalyticResponse analyticResponse = new AnalyticResponse(filteredCompanies.size(), filteredEntrepreneurs.size(),
+        AnalyticResponseDTO analyticResponseDTO = new AnalyticResponseDTO(filteredCompanies.size(), filteredEntrepreneurs.size(),
                 closedCompanies.size(), closedEntrepreneurs.size(),
                 companiesProfit, entrepreneursProfit, closedCompaniesProfit, closedEntrepreneursProfit,
                 avgLifetimeForCompanies, avgLifetimeForEntrepreneurs);
 
-        return analyticResponse;
+        return analyticResponseDTO;
 
 //        return String.format("""
 //                        Number of active companies: %d

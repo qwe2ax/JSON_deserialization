@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.entities.AnalyticResponse;
+import org.example.entities.AnalyticResponseDTO;
 import org.example.services.ReportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,7 @@ public class StatsController {
     }
 
     @GetMapping("/analytic")
-    public AnalyticResponse getAnalytic() {
+    public AnalyticResponseDTO getAnalytic() {
         return reportService.getAnalytic();
     }
 }
