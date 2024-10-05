@@ -2,8 +2,9 @@ package org.example.entities;
 
 import lombok.Getter;
 import lombok.AllArgsConstructor;
+import lombok.ToString;
 
-
+@ToString
 @AllArgsConstructor
 @Getter
 public class AnalyticResponseDTO {

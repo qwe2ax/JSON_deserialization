@@ -1,9 +1,9 @@
 package org.example.services;
 
 import org.example.entities.AnalyticResponseDTO;
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
-import org.example.entities.implementations.Entrepreneur;
+import org.example.entities.CloseInfoItem;
+import org.example.entities.Company;
+import org.example.entities.Entrepreneur;
 import org.example.services.companies.CompaniesAnalyticService;
 import org.example.services.companies.CompaniesDataFilter;
 import org.example.services.entrepreneurs.EntrepreneursAnalyticService;

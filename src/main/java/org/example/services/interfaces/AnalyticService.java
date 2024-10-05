@@ -1,7 +1,6 @@
 package org.example.services.interfaces;
 
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
+import org.example.entities.CloseInfoItem;
 
 import java.util.List;
 

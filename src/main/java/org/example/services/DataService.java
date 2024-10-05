@@ -3,8 +3,7 @@ package org.example.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
-import org.example.entities.implementations.CloseInfoItem;
-import org.springframework.stereotype.Component;
+import org.example.entities.CloseInfoItem;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;

@@ -1,9 +1,9 @@
 package org.example;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
-import org.example.entities.implementations.Entrepreneur;
+import org.example.entities.CloseInfoItem;
+import org.example.entities.Company;
+import org.example.entities.Entrepreneur;
 import org.example.services.DataService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,15 +1,3 @@
-import com.fasterxml.jackson.core.type.TypeReference;
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
-import org.example.entities.implementations.Entrepreneur;
-import org.example.services.DataService;
-
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static org.example.Main.*;
-
 public class InitService {
 //    static List<Entrepreneur> entrepreneurs;
 //    static List<Company> companies;
