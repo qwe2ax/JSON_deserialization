@@ -1,7 +1,7 @@
 package org.example.services.companies;
 
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
+import org.example.entities.CloseInfoItem;
+import org.example.entities.Company;
 import org.example.entities.interfaces.Identifiable;
 import org.example.services.interfaces.AnalyticService;
 import org.springframework.stereotype.Component;

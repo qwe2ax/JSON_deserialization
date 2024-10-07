@@ -1,4 +1,4 @@
-package org.example.entities.implementations;
+package org.example.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

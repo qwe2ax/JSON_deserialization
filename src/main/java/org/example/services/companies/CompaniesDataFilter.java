@@ -1,6 +1,6 @@
 package org.example.services.companies;
 
-import org.example.entities.implementations.Company;
+import org.example.entities.Company;
 import org.example.services.interfaces.DataFilter;
 import org.springframework.stereotype.Component;
 

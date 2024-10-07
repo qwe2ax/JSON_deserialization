@@ -1,10 +1,9 @@
 package org.example.services.entrepreneurs;
 
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Entrepreneur;
+import org.example.entities.CloseInfoItem;
+import org.example.entities.Entrepreneur;
 import org.example.entities.interfaces.Identifiable;
 import org.example.services.interfaces.AnalyticService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
