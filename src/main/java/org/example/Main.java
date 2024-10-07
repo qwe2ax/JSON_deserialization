@@ -1,28 +1,33 @@
 package org.example;
 
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import org.example.entities.implementations.CloseInfoItem;
-import org.example.entities.implementations.Company;
-import org.example.entities.implementations.Entrepreneur;
-import org.example.services.DataService;
-import org.example.services.ReportService;
-import org.example.services.companies.CompaniesDataFilter;
-import org.example.services.entrepreneurs.EntrepreneursDataFilter;
-import org.example.services.interfaces.DataFilter;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.util.List;
-import java.util.Set;
-
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+//@EntityScan("org.example.entities")
+@SpringBootApplication
 public class Main {
-
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(MyConfig.class);
-        ReportService reportService = context.getBean("reportService", ReportService.class);
-        reportService.printAnalytic(context);
-        context.close();
+        SpringApplication.run(Main.class, args);
+//        System.out.println("Открытие сессии");
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        System.out.println("Начало транзакции");
+//        session.beginTransaction();
+//
+//        System.out.println("Создается юзер");
+//        User user = User.builder()
+//                .name("Sabaka1")
+//                .email("sabakadikaya128@gmail.com")
+//                .password("pass123")
+//                .dateOfBirth(LocalDate.of(1989, Calendar.FEBRUARY, 21))
+//                .build();
+//        System.out.println("Сохраняется юзер");
+//        session.persist(user);
+//
+//        System.out.println("Коммитится транзакция, че это ваще такое блять");
+//        session.getTransaction().commit();
+//
+//        System.out.println("Закрытие сессии");
+//        session.close();
+//        System.out.println("Завершение работы Hibernate");
+//        HibernateUtil.shutdown();
     }
 }

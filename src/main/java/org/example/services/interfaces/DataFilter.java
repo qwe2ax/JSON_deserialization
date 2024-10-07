@@ -1,7 +1,5 @@
 package org.example.services.interfaces;
 
-import org.example.entities.implementations.Company;
-
 import java.util.List;
 import java.util.Set;
 
