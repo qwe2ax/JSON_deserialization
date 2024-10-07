@@ -9,6 +9,7 @@
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">root91</property>
 
+
         <!--        &lt;!&ndash; JDBC connection pool settings &ndash;&gt;-->
         <!--        <property name="hibernate.c3p0.min_size">5</property>-->
         <!--        <property name="hibernate.c3p0.max_size">20</property>-->

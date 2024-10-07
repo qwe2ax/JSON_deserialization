@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controllers;
 
 import org.example.entities.AnalyticResponseDTO;
 import org.example.services.ReportServiceImpl;
@@ -19,7 +19,6 @@ public class StatsController {
     public StatsController(ReportServiceImpl reportService) {
         this.reportService = reportService;
     }
-
 
     @GetMapping("/stats")
     public Map<String, Object> getStats() {

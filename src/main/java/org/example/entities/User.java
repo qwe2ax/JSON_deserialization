@@ -2,6 +2,7 @@ package org.example.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +33,8 @@ public class User {
     @Temporal(TemporalType.DATE)
     private LocalDate dateOfBirth;
 
-    @Column(name = "date_of_registration")
+    @CreationTimestamp
+    @Column(name = "date_of_registration", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateOfRegistration;
 
