@@ -38,4 +38,6 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dateOfRegistration;
 
+    @ManyToOne
+    private Department department;
 }

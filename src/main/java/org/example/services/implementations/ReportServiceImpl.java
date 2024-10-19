@@ -1,5 +1,6 @@
-package org.example.services;
+package org.example.services.implementations;
 
+import lombok.RequiredArgsConstructor;
 import org.example.entities.AnalyticResponseDTO;
 import org.example.entities.CloseInfoItem;
 import org.example.entities.Company;
@@ -9,7 +10,6 @@ import org.example.services.companies.CompaniesDataFilter;
 import org.example.services.entrepreneurs.EntrepreneursAnalyticService;
 import org.example.services.entrepreneurs.EntrepreneursDataFilter;
 import org.example.services.interfaces.ReportService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class ReportServiceImpl implements ReportService {
 
@@ -32,16 +33,6 @@ public class ReportServiceImpl implements ReportService {
     private List<Entrepreneur> filteredEntrepreneurs;
     private List<Company> closedCompanies;
     private List<Entrepreneur> closedEntrepreneurs;
-
-    @Autowired
-    public ReportServiceImpl(List<Company> companies, List<Entrepreneur> entrepreneurs, List<CloseInfoItem> closeInfoItems,
-                             CompaniesDataFilter companiesDataFilter, EntrepreneursDataFilter entrepreneursDataFilter) {
-        this.companies = companies;
-        this.entrepreneurs = entrepreneurs;
-        this.closeInfoItems = closeInfoItems;
-        this.companiesDataFilter = companiesDataFilter;
-        this.entrepreneursDataFilter = entrepreneursDataFilter;
-    }
 
     @EventListener(ContextRefreshedEvent.class)
     private void init() {

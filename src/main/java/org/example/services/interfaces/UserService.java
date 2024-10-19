@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.services.interfaces;
 
 import org.example.entities.User;
 
@@ -10,4 +10,6 @@ public interface UserService {
     List<User> getAllUsers();
     void updateUser(User user);
     void deleteUserById(int id);
+    void assignDepartmentToUser(int userId, int departmentId);
+    void assignDepartmentToUser(int userId, String departmentName);
 }

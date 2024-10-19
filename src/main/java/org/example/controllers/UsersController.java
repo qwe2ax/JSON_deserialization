@@ -2,7 +2,8 @@ package org.example.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.example.entities.User;
-import org.example.services.UserService;
+import org.example.services.interfaces.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,4 +40,23 @@ public class UsersController {
     public void delete(@PathVariable("id") int id) {
         userService.deleteUserById(id);
     }
+
+    @PutMapping("/{userId}/departments")
+    public ResponseEntity<String> assignDepartmentToUser(@PathVariable int userId, @RequestParam(required = false) Integer departmentId, @RequestParam(required = false) String departmentName) {
+        if (departmentId != null) {
+            userService.assignDepartmentToUser(userId, departmentId);
+        } else if (departmentName != null) {
+            userService.assignDepartmentToUser(userId, departmentName);
+        } else {
+            return ResponseEntity.badRequest().body("Either department id or department name must be provided");
+        }
+        return ResponseEntity.ok("Department assigned to user successfully");
+    }
+
+//    @PutMapping("/{userId}/departments/{departmentName}")
+//    public ResponseEntity<String> assignDepartmentToUser(@PathVariable int userId, @PathVariable String departmentName) {
+//        userService.assignDepartmentToUser(userId, departmentName);
+//        return ResponseEntity.ok("Department assigned to user successfully");
+//    }
+
 }

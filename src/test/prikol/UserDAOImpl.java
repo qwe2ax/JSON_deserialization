@@ -1,5 +1,6 @@
 package org.example.dao;
 
+
 import lombok.RequiredArgsConstructor;
 import org.example.entities.User;
 import org.hibernate.Session;
@@ -16,14 +17,12 @@ public class UserDAOImpl implements UserDAO {
     private final SessionFactory sessionFactory;
 
     @Override
-    @Transactional
     public void save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.persist(user);
     }
 
     @Override
-    @Transactional
     public User findById(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(User.class, id);
