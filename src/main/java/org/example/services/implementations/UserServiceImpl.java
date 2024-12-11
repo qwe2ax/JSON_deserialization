@@ -2,8 +2,10 @@ package org.example.services.implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.example.dao.DepartmentRepository;
+import org.example.dao.RoleRepository;
 import org.example.dao.UserRepository;
 import org.example.entities.Department;
+import org.example.entities.Role;
 import org.example.entities.User;
 import org.example.services.interfaces.UserService;
 import org.springframework.stereotype.Service;
@@ -17,11 +19,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
+    private final RoleRepository roleRepository;
 
     @Transactional
     @Override
-    public void saveUser(User user) {
-        userRepository.save(user);
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
@@ -69,6 +72,25 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("No such department with name " + departmentName));
         user.setDepartment(department);
         userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public User assignRoleToUser(int userId, int roleId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("No such user by id " + userId));
+
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("No such role by id " + roleId));
+
+        if (!user.getRoles().contains(role)) {
+            user.getRoles().add(role);
+            userRepository.save(user);
+        } else {
+            throw new IllegalStateException("User already has role " + role.getName());
+        }
+
+        return user;
     }
 
 
