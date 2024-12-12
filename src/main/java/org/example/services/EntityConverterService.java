@@ -79,19 +79,16 @@ public class EntityConverterService {
     }
 
     public RoleDTO convertRoleToDTO(Role role) {
+        List<UserDTO> usersDTO = role.getUsers().stream().map(this::convertUserToDTO).toList();
         return RoleDTO.builder()
                 .id(role.getId())
                 .name(role.getName())
-                .userIds(role.getUsers() != null ?
-                        role.getUsers().stream()
-                                .map(User::getId)
-                                .toList()
-                        : null)
+                .users(usersDTO.isEmpty() ? null : usersDTO)
                 .build();
     }
 
     public Role convertToRole(RoleDTO roleDTO) {
-        List<User> users = userRepository.findAllById(roleDTO.getUserIds());
+        List<User> users = roleDTO.getUsers().stream().map(this::convertToUser).toList();
 
         return Role.builder()
                 .id(roleDTO.getId())
