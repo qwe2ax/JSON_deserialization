@@ -17,8 +17,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Transactional
     @Override
-    public void saveDepartment(Department department) {
-        departmentRepository.save(department);
+    public Department saveDepartment(Department department) {
+        return departmentRepository.save(department);
     }
 
     @Transactional(readOnly = true)
