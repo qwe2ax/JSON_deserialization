@@ -19,6 +19,6 @@ public class UserDTO {
     private String email;
     private LocalDate dateOfBirth;
     private LocalDateTime dateOfRegistration;
-    private int departmentId; // Например, можно передавать только ID департамента
-    private List<Integer> roleIds; // Для ролей также можно передавать только список ID
+    private int departmentId;
+    private List<Integer> roleIds;
 }
