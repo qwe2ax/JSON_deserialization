@@ -2,10 +2,7 @@ package org.example.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -17,6 +14,7 @@ import java.util.List;
 @Setter
 @Table(name = "department", schema = "taskscheme")
 @Entity
+@Builder
 public class Department {
 
     @Id
