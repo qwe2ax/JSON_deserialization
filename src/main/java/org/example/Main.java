@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.services.implementations.UserServiceImpl;
+import org.example.services.interfaces.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EntityScan("org.example.entities")

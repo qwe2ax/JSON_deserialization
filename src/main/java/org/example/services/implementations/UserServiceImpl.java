@@ -1,12 +1,15 @@
 package org.example.services.implementations;
 
 import lombok.RequiredArgsConstructor;
+import org.example.configs.SecurityConfig;
 import org.example.dao.DepartmentRepository;
 import org.example.dao.RoleRepository;
 import org.example.dao.UserRepository;
 import org.example.entities.Department;
 import org.example.entities.Role;
 import org.example.entities.User;
+import org.example.services.AuthService;
+import org.example.services.interfaces.RoleService;
 import org.example.services.interfaces.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +20,16 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final AuthService authService;
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
     private final RoleRepository roleRepository;
+    private final SecurityConfig securityConfig;
 
     @Transactional
     @Override
     public User saveUser(User user) {
+        user.setPassword(securityConfig.passwordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -77,6 +83,16 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User assignRoleToUser(int userId, int roleId) {
+
+        User currentUser = authService.getCurrentAuthenticatedUser();
+
+        boolean isAdmin = currentUser.getRoles().stream()
+                .anyMatch(role -> "ADMIN".equals(role.getName()));
+
+        if (!isAdmin) {
+            throw new SecurityException("You do not have permission to assign roles.");
+        }
+
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("No such user by id " + userId));
 
