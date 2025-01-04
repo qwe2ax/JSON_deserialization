@@ -1,14 +1,19 @@
 package org.example.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.example.configs.SecurityConfig;
+import org.example.dao.UserRepository;
 import org.example.dto.UserDTO;
 import org.example.entities.User;
 import org.example.services.EntityConverterService;
 import org.example.services.interfaces.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Security;
 import java.util.List;
 
 @RequiredArgsConstructor

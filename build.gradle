@@ -13,19 +13,19 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
-    implementation group: 'org.springframework', name: 'spring-jdbc', version: '6.1.13'
+    implementation group: 'org.springframework', name: 'spring-jdbc', version: '6.1.14'
 // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.4'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.3.3'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.4.1'
     // https://mvnrepository.com/artifact/org.springframework/spring-web
     implementation group: 'org.springframework', name: 'spring-web', version: '6.1.12'
     // https://mvnrepository.com/artifact/org.springframework/spring-context
-    implementation group: 'org.springframework', name: 'spring-context', version: '6.1.12'
+    implementation group: 'org.springframework', name: 'spring-context', version: '6.2.1'
     // https://mvnrepository.com/artifact/org.springframework/spring-core
-    implementation group: 'org.springframework', name: 'spring-core', version: '6.1.12'
+    implementation group: 'org.springframework', name: 'spring-core', version: '6.2.1'
     // https://mvnrepository.com/artifact/org.springframework/spring-beans
-    implementation group: 'org.springframework', name: 'spring-beans', version: '6.1.12'
+    implementation group: 'org.springframework', name: 'spring-beans', version: '6.2.1'
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
@@ -43,7 +43,15 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     implementation 'javax.xml.bind:jaxb-api:2.3.0'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.4'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '3.4.1'
+// https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api
+    compileOnly group: 'jakarta.servlet', name: 'jakarta.servlet-api', version: '6.1.0'
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '3.4.1'
+
+
+
+
 
 
 //    testImplementation platform('org.junit:junit-bom:5.10.0')

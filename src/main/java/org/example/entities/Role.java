@@ -15,11 +15,12 @@ import java.util.List;
 public class Role {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
+
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;

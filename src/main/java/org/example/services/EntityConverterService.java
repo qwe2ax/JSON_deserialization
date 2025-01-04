@@ -25,6 +25,7 @@ public class EntityConverterService {
 
     public UserDTO convertUserToDTO (User user) {
         return UserDTO.builder()
+                .password(user.getPassword())
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
@@ -42,6 +43,7 @@ public class EntityConverterService {
         List<Role> roles = roleRepository.findAllById(userDTO.getRoleIds());
 
         return User.builder()
+                .password(userDTO.getPassword())
                 .id(userDTO.getId())
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
